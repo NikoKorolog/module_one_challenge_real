@@ -158,6 +158,10 @@ present_loan_value(new_loan .20)
 
 print(f"The present value of the loan is: {present_value}")
 
+if present_loan_value >= newloan["loan_price"]:
+    print("this loan is a good choice"),
+else: 
+    print("this loan is not a good choice"),
 
 """Part 4: Conditionally filter lists of loans.
 
@@ -205,8 +209,14 @@ inexpensive_loans = []
 # @TODO: Loop through all the loans and append any that cost $500 or less to the `inexpensive_loans` list
 # YOUR CODE HERE!
 
+for each_loan in loans:
+        if "loan_price" <= 500:
+            inexpensive_loans.append(each_loan)
+
 # @TODO: Print the `inexpensive_loans` list
 # YOUR CODE HERE!
+
+print(f"the inexpensive loans are {inexpensive_loans}")
 
 
 """Part 5: Save the results.
