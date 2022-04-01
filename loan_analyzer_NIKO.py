@@ -2,6 +2,18 @@
 import csv
 from pathlib import Path
 
+#preemptively saving the bank loan rate data as a dictionary so that it can be appended and written at the end of the code.
+
+csvpath = Path("daily_rate_sheet.csv")
+with open(csvpath) as csvfile: #with and open open a connection from the Python program to the file you're working with -- in this case, csvfile
+    bank_loan_data = csv.reader(csvfile)
+
+""" #THIS CODE SNIPPET IS THE DEFAULT CSV READER IN CASE YOU NEED TO IMPORT ADDITIONAL CSV DATA
+csvpath = Path("additional_data.csv")
+with open(csvpath) as csvfile: #with and open open a connection from the Python program to the file you're working with -- in this case, csvfile
+    additional_data = csv.reader(csvfile)
+"""
+
 """Part 1: Automate the Calculations.
 
 Automate the calculations for the loan portfolio summaries.
@@ -19,15 +31,24 @@ loan_costs = [500, 600, 200, 1000, 450]
 # Print the number of loans from the list
 # YOUR CODE HERE!
 
+loans_no = len(loan_costs)
+print(f"There are currently {loans_no} loans")
+
 # What is the total of all loans?
 # @TODO: Use the `sum` function to calculate the total of all loans in the list.
 # Print the total value of the loans
 # YOUR CODE HERE!
 
+loans_total = sum(loan_costs)
+print(f"The sum of all loans is {loans_total}")
+
 # What is the average loan amount from the list?
 # @TODO: Using the sum of all loans and the total number of loans, calculate the average loan price.
 # Print the average loan amount
 # YOUR CODE HERE!
+
+average_loan = loans_total / loans_no
+print(f"The average loan size is ${average_loan}")
 
 """Part 2: Analyze Loan Data.
 
@@ -42,7 +63,11 @@ Using more detailed data on one of these loans, follow these steps to calculate 
     @NOTE:
     **Future Value**: The amount of money the borrower has to pay back upon maturity of the loan (a.k.a. "Face Value")
     **Remaining Months**: The remaining maturity (in months) before the loan needs to be fully repaid.
+"""
+future_value = loan.get("future_value")
+remaining_months = loan.get("remaining_months")
 
+"""""
 2. Use the formula for Present Value to calculate a "fair value" of the loan. Use a minimum required return of 20% as the discount rate.
 3. Write a conditional statement (an if-else statement) to decide if the present value represents the loan's fair value.
     a. If the present value of the loan is greater than or equal to the cost, then print a message that says the loan is worth at least the cost to buy it.
@@ -64,13 +89,18 @@ loan = {
 # Print each variable.
 # YOUR CODE HERE!
 
+future_value = loan.get("future_value")
+remaining_months = loan.get("remaining_months")
+
 
 # @TODO: Use the formula for Present Value to calculate a "fair value" of the loan.
 # Use a minimum required return of 20% as the discount rate.
 #   You'll want to use the **monthly** version of the present value formula.
 #   HINT: Present Value = Future Value / (1 + Discount_Rate/12) ** remaining_months
-
 # YOUR CODE HERE!
+
+discount_rate = .20
+fair_value = future_value /(1 + discount_rate/12) ** remaining_months #DOUBLE CHECK TO SEE IF DISCOUNT RATE
 
 # If Present Value represents what the loan is really worth, does it make sense to buy the loan at its cost?
 # @TODO: Write a conditional statement (an if-else statement) to decide if the present value represents the loan's fair value.
@@ -103,10 +133,18 @@ new_loan = {
 #    The function should return the `present_value` for the loan.
 # YOUR CODE HERE!
 
+def present_loan_value(loandata, annual_discount_rate):
+    fair_value = loandata.get("future_value") /(1 + annual_discount_rate/12) ** loandata.get("remaining_months")
+    return fair_value
+
 
 # @TODO: Use the function to calculate the present value of the new loan given below.
 #    Use an `annual_discount_rate` of 0.2 for this new loan calculation.
 # YOUR CODE HERE!
+
+present_loan_value(new_loan .20)
+
+
 print(f"The present value of the loan is: {present_value}")
 
 
@@ -120,6 +158,7 @@ In this section, you will use a loop to iterate through a series of loans and se
     b. If the loan_price is less than or equal to 500 then append that loan to the `inexpensive_loans` list.
 3. Print the list of inexpensive_loans.
 """
+inexpensive_loans = []
 
 loans = [
     {
