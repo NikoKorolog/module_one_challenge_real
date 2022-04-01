@@ -133,8 +133,19 @@ new_loan = {
 #    The function should return the `present_value` for the loan.
 # YOUR CODE HERE!
 
-def present_loan_value(loandata, annual_discount_rate):
+"""This function was modified from the original so that it can take a dictionary rather than discrete values.
+the code as expected by the assignment is as follows:
+
+def present_loan_value(future_vale, remaining_months, annual_discount_rate,): 
+    fair_value = uture_value /(1 + annual_discount_rate/12) ** remaining_months)
+    return fair_value
+
+the reason I did this is because I would have to otherwise write separate code to extract the data out of new_loan and then 
+assign it to variables that are passed into the function. So this basically eliminates a step.
+"""
+def present_loan_value(loandata, annual_discount_rate): 
     fair_value = loandata.get("future_value") /(1 + annual_discount_rate/12) ** loandata.get("remaining_months")
+    print(fair_value)
     return fair_value
 
 
@@ -158,7 +169,6 @@ In this section, you will use a loop to iterate through a series of loans and se
     b. If the loan_price is less than or equal to 500 then append that loan to the `inexpensive_loans` list.
 3. Print the list of inexpensive_loans.
 """
-inexpensive_loans = []
 
 loans = [
     {
@@ -189,6 +199,8 @@ loans = [
 
 # @TODO: Create an empty list called `inexpensive_loans`
 # YOUR CODE HERE!
+
+inexpensive_loans = []
 
 # @TODO: Loop through all the loans and append any that cost $500 or less to the `inexpensive_loans` list
 # YOUR CODE HERE!
