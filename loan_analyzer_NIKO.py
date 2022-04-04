@@ -50,7 +50,7 @@ print(f"The sum of all loans is {loans_total}")
 # YOUR CODE HERE!
 
 average_loan = loans_total / loans_no
-print(f"The average loan size is ${average_loan} blah blah testing")
+print(f"The average loan size is ${average_loan}")
 
 """Part 2: Analyze Loan Data.
 
