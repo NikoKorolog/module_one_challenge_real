@@ -1,17 +1,19 @@
 # coding: utf-8
-import csv
+import csv    #needed for last step
 from pathlib import Path
 
 #preemptively saving the bank loan rate data as a dictionary so that it can be appended and written at the end of the code.
+#this is not necessary so I'm commenting it out
 
-csvpath = Path("daily_rate_sheet.csv")
-with open(csvpath) as csvfile: #with and open open a connection from the Python program to the file you're working with -- in this case, csvfile
-    bank_loan_data = csv.reader(csvfile)
+# csvpath = Path("daily_rate_sheet.csv")
+# with open(csvpath) as csvfile: #with and open open a connection from the Python program to the file you're working with -- in this case, csvfile
+#    bank_loan_data = csv.reader(csvfile)
 
 """ #THIS CODE SNIPPET IS THE DEFAULT CSV READER IN CASE YOU NEED TO IMPORT ADDITIONAL CSV DATA
-csvpath = Path("additional_data.csv")
+csvpath = Path("daily_rate_sheet.csv")
 with open(csvpath) as csvfile: #with and open open a connection from the Python program to the file you're working with -- in this case, csvfile
     additional_data = csv.reader(csvfile)
+   
 """
 
 """Part 1: Automate the Calculations.
@@ -63,7 +65,21 @@ Using more detailed data on one of these loans, follow these steps to calculate 
     @NOTE:
     **Future Value**: The amount of money the borrower has to pay back upon maturity of the loan (a.k.a. "Face Value")
     **Remaining Months**: The remaining maturity (in months) before the loan needs to be fully repaid.
+
+
+
 """
+#had to move this dictionary before declaration of the variables 'future_value' and 'remaining_months' because python did not see the dictionary
+#and returned an error that the dictionary 'loan' was not defined.
+
+loan = {       
+    "loan_price": 500,
+    "remaining_months": 9,
+    "repayment_interval": "bullet",
+    "future_value": 1000,
+}
+
+
 future_value = loan.get("future_value")
 remaining_months = loan.get("remaining_months")
 
@@ -78,12 +94,6 @@ remaining_months = loan.get("remaining_months")
 """
 
 # Given the following loan data, you will need to calculate the present value for the loan
-loan = {
-    "loan_price": 500,
-    "remaining_months": 9,
-    "repayment_interval": "bullet",
-    "future_value": 1000,
-}
 
 # @TODO: Use get() on the dictionary of additional information to extract the Future Value and Remaining Months on the loan.
 # Print each variable.
@@ -153,12 +163,13 @@ def present_loan_value(loandata, annual_discount_rate):
 #    Use an `annual_discount_rate` of 0.2 for this new loan calculation.
 # YOUR CODE HERE!
 
-present_loan_value(new_loan .20)
+
+present_loan_value(new_loan, .20) #the function here takes the dictionary new_loan but could take any dictionary with the keys 'future_value' etc.
 
 
-print(f"The present value of the loan is: {present_value}")
+print(f"The present value of the loan is: {fair_value}")
 
-if present_loan_value >= newloan["loan_price"]:
+if fair_value >= new_loan["loan_price"]:
     print("this loan is a good choice"),
 else: 
     print("this loan is not a good choice"),
@@ -207,10 +218,15 @@ loans = [
 inexpensive_loans = []
 
 # @TODO: Loop through all the loans and append any that cost $500 or less to the `inexpensive_loans` list
-# YOUR CODE HERE!
+# YOUR CODE HER
+
+price = 0
+
+# print(f"THIS IS THE FIRST LOAN IN LOANS {loans[1]} FOR TESTING PURPOSES")
+
 
 for each_loan in loans:
-        if "loan_price" <= 500:
+        if each_loan["loan_price"] <= 500:                    
             inexpensive_loans.append(each_loan)
 
 # @TODO: Print the `inexpensive_loans` list
@@ -242,3 +258,11 @@ output_path = Path("inexpensive_loans.csv")
 # @TODO: Use the csv library and `csv.writer` to write the header row
 # and each row of `loan.values()` from the `inexpensive_loans` list.
 # YOUR CODE HERE!
+
+with open(output_path, 'w', newline='') as csvfile:
+    csvwriter = csv.writer(csvfile)
+    csvwriter.writerow(header)    
+    for row in inexpensive_loans:
+        csvwriter.writerow(row.values())
+
+    
