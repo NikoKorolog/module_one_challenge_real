@@ -50,7 +50,7 @@ print(f"The sum of all loans is {loans_total}")
 # YOUR CODE HERE!
 
 average_loan = loans_total / loans_no
-print(f"The average loan size is ${average_loan}")
+print(f"The average loan size is ${average_loan} blah blah testing")
 
 """Part 2: Analyze Loan Data.
 
@@ -66,10 +66,8 @@ Using more detailed data on one of these loans, follow these steps to calculate 
     **Future Value**: The amount of money the borrower has to pay back upon maturity of the loan (a.k.a. "Face Value")
     **Remaining Months**: The remaining maturity (in months) before the loan needs to be fully repaid.
 
-
-
 """
-#had to move this dictionary before declaration of the variables 'future_value' and 'remaining_months' because python did not see the dictionary
+#had to move this dictionary "loan" before declaration of the variables 'future_value' and 'remaining_months' because python did not see the dictionary
 #and returned an error that the dictionary 'loan' was not defined.
 
 loan = {       
@@ -155,7 +153,7 @@ assign it to variables that are passed into the function. So this basically elim
 """
 def present_loan_value(loandata, annual_discount_rate): 
     fair_value = loandata.get("future_value") /(1 + annual_discount_rate/12) ** loandata.get("remaining_months")
-    print(fair_value)
+    print(f"the fair value of the present loan 'new_loan' is {fair_value}")
     return fair_value
 
 
@@ -170,9 +168,9 @@ present_loan_value(new_loan, .20) #the function here takes the dictionary new_lo
 print(f"The present value of the loan is: {fair_value}")
 
 if fair_value >= new_loan["loan_price"]:
-    print("this loan is a good choice"),
+    print("This loan is a good choice"),
 else: 
-    print("this loan is not a good choice"),
+    print("This loan is not a good choice"),
 
 """Part 4: Conditionally filter lists of loans.
 
@@ -265,4 +263,4 @@ with open(output_path, 'w', newline='') as csvfile:
     for row in inexpensive_loans:
         csvwriter.writerow(row.values())
 
-    
+#finito
