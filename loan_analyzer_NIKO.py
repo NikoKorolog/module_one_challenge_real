@@ -48,6 +48,7 @@ print(f"The sum of all loans is {loans_total}")
 # @TODO: Using the sum of all loans and the total number of loans, calculate the average loan price.
 # Print the average loan amount
 # YOUR CODE HERE!
+#
 
 average_loan = loans_total / loans_no
 print(f"The average loan size is ${average_loan}")
